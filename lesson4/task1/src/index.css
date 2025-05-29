@@ -1,0 +1,22 @@
+#root {
+    max-width: 1100px;
+    margin: 250px auto;
+    padding: 25px;
+}
+
+div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+li {
+    width: 220px;
+    display: flex;
+    justify-content: space-between;
+    margin: 15px;
+    border-radius: 20px;
+    padding: 25px;
+    border: 2px solid rgb(26, 4, 4);
+}
