@@ -1,41 +1,36 @@
 import React, { useState, useContext } from 'react';
-import { TaskContext } from './TaskContext.jsx';
+import { TaskContext } from './TaskContext';
 
 function TaskForm() {
-  const [title, setTitle] = useState('');
-  const { addTask, activeTasksCount, setSort } = useContext(TaskContext);
+  const { addTask } = useContext(TaskContext);
+  const [inputValue, setInputValue] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (title.trim()) {
-      addTask(title);
-      setTitle('');
+    addTask(inputValue);
+    setInputValue('');
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit(e);
     }
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className="task-form">
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Додати нове завдання..."
-        />
-        <button type="submit">Додати</button>
-      </form>
-      <p>Незавершених завдань: {activeTasksCount}</p>
-      <div className="sort-form">
-        <label>Сортувати: </label>
-        <select onChange={(e) => setSort(e.target.value)}>
-          <option value="createdAtDesc">Нові спочатку</option>
-          <option value="createdAtAsc">Старі спочатку</option>
-          <option value="titleAsc">За назвою (А-Я)</option>
-          <option value="titleDesc">За назвою (Я-А)</option>
-          <option value="importantFirst">Важливі спочатку</option>
-        </select>
-      </div>
-    </div>
+    <form onSubmit={handleSubmit} className="input-container">
+      <input
+        type="text"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        onKeyPress={handleKeyPress}
+        className="task-input"
+        placeholder="Введіть нове завдання"
+      />
+      <button type="submit" className="add-button">
+        Додати завдання
+      </button>
+    </form>
   );
 }
 
