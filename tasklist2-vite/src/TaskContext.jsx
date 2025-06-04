@@ -15,6 +15,8 @@ export const TaskProvider = ({ children }) => {
           id: Date.now(),
           text,
           completed: false,
+          createdAt: new Date().toISOString(),
+          editedAt: null,
         },
       ]);
     }
@@ -32,7 +34,9 @@ export const TaskProvider = ({ children }) => {
   const saveEditTask = (id) => {
     setTasks(
       tasks.map((task) =>
-        task.id === id ? { ...task, text: editTaskText } : task
+        task.id === id
+          ? { ...task, text: editTaskText, editedAt: new Date().toISOString() }
+          : task
       )
     );
     setEditTaskId(null);

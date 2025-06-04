@@ -15,6 +15,23 @@
   letter-spacing: 0.5px;
 }
 
+.task-counter {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 30px;
+  padding: 15px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 1.1rem;
+  color: #1e293b;
+}
+
+.task-counter span {
+  font-weight: 500;
+}
+
 .input-container {
   display: flex;
   gap: 15px;
@@ -98,14 +115,15 @@
 
 .task-item {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   padding: 15px;
   margin-bottom: 10px;
   background-color: #f1f5f9;
   border-radius: 8px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   animation: fadeIn 0.5s ease-in;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .task-item:hover {
@@ -123,12 +141,25 @@
     transform: translateY(0);
   }
 }
+.task-display-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.task-edit-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
 
 .task-content {
   display: flex;
-  align-items: center;
-  flex-grow: 1;
+  align-items: flex-start;
   gap: 12px;
+  min-width: 0;
 }
 
 .task-checkbox {
@@ -136,16 +167,38 @@
   height: 20px;
   cursor: pointer;
   accent-color: #3b82f6;
+  margin-top: 4px;
+}
+
+.task-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
 }
 
 .task-text {
   font-size: 1.1rem;
   color: #1e293b;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .task-text.completed {
   text-decoration: line-through;
   color: #64748b;
+}
+
+.task-dates {
+  font-size: 0.9rem;
+  color: #64748b;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.task-dates span {
+  white-space: nowrap;
 }
 
 .edit-input {
@@ -165,39 +218,49 @@
 
 .task-actions {
   display: flex;
-  gap: 12px;
+  gap: 8px;
+  flex-shrink: 0;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.save-button,
+.edit-button,
+.delete-button {
+  padding: 4px 10px;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
 }
 
 .save-button,
 .edit-button {
   color: #10b981;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 0.95rem;
-  font-weight: 500;
-  transition: color 0.3s ease, transform 0.2s ease;
+  border-color: #10b981;
 }
 
 .save-button:hover,
 .edit-button:hover {
   color: #059669;
-  transform: translateY(-2px);
+  background-color: rgba(16, 185, 129, 0.1);
+  border-color: #059669;
+  transform: translateY(-1px);
 }
 
 .delete-button {
   color: #ef4444;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 0.95rem;
-  font-weight: 500;
-  transition: color 0.3s ease, transform 0.2s ease;
+    border-color: #ef4444;
 }
 
 .delete-button:hover {
   color: #dc2626;
-  transform: translateY(-2px);
+  background-color: rgba(239, 68, 68, 0.1);
+  border-color: #dc2626;
+  transform: translateY(-1px);
 }
 
 @media (max-width: 768px) {
@@ -208,5 +271,24 @@
 
   .task-column {
     min-width: 100%;
+  }
+
+  .task-counter {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .task-content {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .task-checkbox {
+    margin-top: 0;
+  }
+
+  .task-actions {
+    justify-content: flex-start;
   }
 }
